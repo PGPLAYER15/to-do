@@ -1,7 +1,7 @@
 .temporizador {
     display: flex;
-    flex-direction: row; /* Alinea los elementos horizontalmente */
-    align-items: center; /* Centra los elementos verticalmente */
+    flex-direction: row; 
+    align-items: center;
     font-size: 15px;
     font-weight: bold;
     color: #ffffff;
@@ -12,5 +12,5 @@
 }
 
 .temporizador .tiempo {
-    margin-right: 10px; /* Agrega un margen derecho al temporizador */
+    margin-right: 10px; 
 }

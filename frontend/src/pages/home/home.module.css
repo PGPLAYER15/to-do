@@ -1,0 +1,6 @@
+.contenedor{
+    display: flex;
+    margin: 43px 30px;  
+    gap: 30px;
+}
+

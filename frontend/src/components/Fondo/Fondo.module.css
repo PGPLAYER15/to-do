@@ -1,0 +1,12 @@
+:root {
+    --color-fondo: #D9D9D9;
+    --ancho-fondo: 100vw;
+    --alto-fondo: 100vh;
+}
+
+.fondo {
+    background-color: var(--color-fondo);
+    width: var(--ancho-fondo);
+    height: var(--alto-fondo);
+    overflow: hidden; /* Asegúrate de que el contenido no sobresalga */
+}
