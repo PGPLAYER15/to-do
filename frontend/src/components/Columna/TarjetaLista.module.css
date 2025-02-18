@@ -4,7 +4,7 @@
     height: fit-content;
     color: #FFFFFF;
     background-color: #1E1E1E;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 13px;
     align-items: flex-start;
     flex-direction: column;
@@ -13,15 +13,19 @@
 .titulo{
     font-size: 15px;
     margin: 10px 5px;
-
 }
 
 .btn_crear_card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     width: 100%;
     height: 24px;
     background-color: #313131;
     color: white;
     font-size: 10px;
+    outline: none;
 }
 
 .Tarjeta{   

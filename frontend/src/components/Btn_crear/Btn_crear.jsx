@@ -1,30 +1,128 @@
-import CrearIcon from "../../assets/CrearIcon.svg"
-import styles from "../Btn_crear/Btn_crear.module.css"
 import { useState } from "react";
+import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy, } from "@dnd-kit/sortable";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
+import CrearIcon from "../../assets/CrearIcon.svg";
 import Columna from "../Columna/Columna";
+import styles from "../Btn_crear/Btn_crear.module.css";
 
 function Btn_crear() {
     const [mostrarInput, setMostrarInput] = useState(false);
-    const [titulo, setTitulo] = useState("");
+    const [tituloColumna, setTituloColumna] = useState("");
     const [columnas, setColumnas] = useState([]);
 
-    const handleGuardar = () => {
-        if (titulo.trim() !== "") {
-            setColumnas([...columnas, titulo]);
-            setTitulo("");
+    const handleGuardarColumna = () => {
+        if (tituloColumna.trim()) {
+            const nuevaColumna = {
+                id: `columna-${Date.now()}`,
+                titulo: tituloColumna,
+                cards: []
+            };
+            setColumnas([...columnas, nuevaColumna]);
+            setTituloColumna("");
             setMostrarInput(false);
         }
     };
 
+    const handleAddCard = (columnaId, tituloTarjeta) => {
+        setColumnas(prev => prev.map(col => 
+            col.id === columnaId
+                ? { 
+                    ...col, 
+                    cards: [...col.cards, { 
+                        id: `card-${Date.now()}`, 
+                        title: tituloTarjeta 
+                    }] 
+                }
+                : col
+        ));
+    };
+
+    const handleDragEnd = ({ active, over }) => {
+        if (!over) return;
+    
+        const activeColumnaId = active.data.current?.columnaId;
+        const overColumnaId = over.data.current?.columnaId || over.id;
+    
+        if (activeColumnaId !== overColumnaId) {
+            setColumnas(prev => {
+                const columnaOrigen = prev.find(c => c.id === activeColumnaId);
+                const columnaDestino = prev.find(c => c.id === overColumnaId);
+                const activeCard = columnaOrigen?.cards.find(c => c.id === active.id);
+    
+                if (!activeCard || !columnaDestino) return prev;
+    
+                return prev.map(col => {
+                    if (col.id === activeColumnaId) {
+                        return {
+                            ...col,
+                            cards: col.cards.filter(c => c.id !== active.id)
+                        };
+                    }
+                    if (col.id === overColumnaId) {
+                        return {
+                            ...col,
+                            cards: [...col.cards, activeCard]
+                        };
+                    }
+                    return col;
+                });
+            });
+        }
+        else {
+            setColumnas(prev => prev.map(col => {
+                if (col.id === activeColumnaId) {
+                    const oldIndex = col.cards.findIndex(c => c.id === active.id);
+                    const newIndex = col.cards.findIndex(c => c.id === over.id);
+                    
+                    return {
+                        ...col,
+                        cards: arrayMove(col.cards, oldIndex, newIndex)
+                    };
+                }
+                return col;
+            }));
+        }
+    };
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8,
+            },
+        })
+    );
+
     return (
         <div className={styles.contenedor}>
             <div className={styles.columnas}>
-                {columnas.map((columna, index) => (
-                    <Columna key={index} titulo={columna} />
-                ))}
+                <DndContext 
+                    onDragEnd={handleDragEnd}
+                    sensors={sensors}
+                    modifiers={[restrictToWindowEdges]}
+                >
+                    {columnas.map((columna) => (
+                        <SortableContext 
+                            key={columna.id}
+                            items={columna.cards}
+                            strategy={verticalListSortingStrategy}
+                        >
+                            <Columna
+                                id={columna.id}
+                                titulo={columna.titulo}
+                                cards={columna.cards}
+                                onAddCard={handleAddCard}
+                            />
+                        </SortableContext>
+                    ))}
+                </DndContext>
+
                 <div className={styles.crear}>
                     {!mostrarInput ? (
-                        <button onClick={() => setMostrarInput(true)} className={styles.btn_crearlista}>
+                        <button 
+                            onClick={() => setMostrarInput(true)}
+                            className={styles.btn_crearlista}
+                        >
                             <img src={CrearIcon} alt="Crear Icono" />
                             Añadir nueva lista
                         </button>
@@ -32,13 +130,24 @@ function Btn_crear() {
                         <div className={styles.contenedor_input}>
                             <input
                                 type="text"
-                                placeholder="Titulo"
-                                value={titulo}
-                                onChange={(e) => setTitulo(e.target.value)}
+                                placeholder="Título de la lista"
+                                value={tituloColumna}
+                                onChange={(e) => setTituloColumna(e.target.value)}
+                                autoFocus
                             />
                             <div className={styles.contenedor_botones}>
-                                <button onClick={handleGuardar} className={styles.btn_guardar}>Guardar</button>
-                                <button onClick={() => setMostrarInput(false)} className={styles.btn_cancelar}>Cancelar</button>
+                                <button 
+                                    onClick={handleGuardarColumna} 
+                                    className={styles.btn_guardar}
+                                >
+                                    Guardar
+                                </button>
+                                <button 
+                                    onClick={() => setMostrarInput(false)}
+                                    className={styles.btn_cancelar}
+                                >
+                                    Cancelar
+                                </button>
                             </div>
                         </div>
                     )}
