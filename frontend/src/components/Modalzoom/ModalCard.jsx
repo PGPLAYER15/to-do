@@ -1,0 +1,3 @@
+function ModalCard({isOpen,CloseModal}) {
+    
+}

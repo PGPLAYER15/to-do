@@ -49,9 +49,17 @@
     padding: 10px 0;
     opacity: 0;
     transition: opacity 0.3s ease;
+    outline: none;
 }
 
-.menuItem::not(:focus-visible){
+.menuItem:not(:focus-visible){
+    outline: none;
+}
+
+
+.menuButton:focus,
+.menuButton:active,
+.menuButton:focus-visible {
     outline: none;
 }
 

@@ -20,7 +20,7 @@ function Card(props) {
     };
 
     return (
-        <div 
+        <div onClick={()=>console.log("hola")}
             ref={setNodeRef} 
             style={style} 
             {...listeners} 

@@ -4,3 +4,32 @@
     gap: 30px;
 }
 
+.menu-tableros {
+    padding: 20px;
+}
+  
+.lista-tableros {
+    display: flex;
+    gap: 2%;
+    flex-wrap: wrap;
+}
+  
+.tablero-card{
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+  
+.tablero-card:hover {
+    transform: scale(1.05);
+}
+
+.tablero-preview {
+    height: 100px;
+    border-radius: 8px;
+    margin-top: 10px;
+}

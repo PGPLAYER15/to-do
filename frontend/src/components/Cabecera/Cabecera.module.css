@@ -1,45 +1,44 @@
-/* Cabecera.module.css */
 .cabecera {
     display: flex;
-    justify-content:left;
     align-items: center;
     background-color: #2F2C2C;
     padding: 0 2rem;
     height: 6.8vh;
     width: 100%;
     gap: 1rem;
+    justify-content: center;
 }
 
-/* Grupo izquierdo centrado con espaciado */
 .cabecera__left_group {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espacio entre botones */
-    margin-left: 2rem; /* Separación del borde izquierdo */
+    gap: 1.5rem;
+    margin-left: 2rem; 
 }
 
-/* Botones con tamaño consistente */
 .btn_espacio,
 .btn_menu_arriba {
     padding: 0.6rem 1.2rem;
     border-radius: 5px;
     font-size: 0.95rem;
     transition: all 0.2s ease;
-    min-width: 140px; /* Ancho mínimo para consistencia */
+    min-width: 140px;
     text-align: center;
+    outline: none;
 }
 
-/* Estilos específicos para cada botón */
 .btn_espacio {
     background-color: #4d4848;
     border: 1px solid #666;
     color: white;
+    outline: none;
 }
 
 .btn_menu_arriba {
     background-color: #D9D9D9;
     border: 1px solid #D9D9D9;
     color: #000;
+    outline: none;
 }
 
 .btn_espacio:hover {
@@ -50,6 +49,15 @@
 .btn_menu_arriba:hover {
     background-color: #e2dfdf;
     border-color: #e2dfdf;
+}
+
+.btn_espacio:focus,
+.btn_espacio:active,
+.btn_espacio:focus-visible,
+.btn_menu_arriba:focus,
+.btn_menu_arriba:active,
+.btn_menu_arriba:focus-visible {
+    outline: none;
 }
 
 .contenedor_tempo {
