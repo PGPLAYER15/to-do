@@ -1,5 +1,5 @@
 .contenedor {
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: flex-start;
     gap: 10px;

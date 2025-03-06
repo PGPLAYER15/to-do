@@ -15,6 +15,7 @@ function Home() {
         const fetchTableros = async () => {
             try {
                 const response = await axios.get("http://localhost:8000/api/boards/");
+                console.log("Tableros obtenidos:", response.data);
                 setTableros(response.data);
             } catch (error) {
                 console.error("Error al obtener tableros:", error);
@@ -42,18 +43,10 @@ function Home() {
                                 onClick={() => navigate(`/tablero/${tablero.id}`)}
                             >
                                 <h3>{tablero.title}</h3>
+                                <p>{tablero.id}</p>
                                 <div 
-                                    className={styles.boardPreview}
-                                    style={{ backgroundColor: "#f0f0f0" }}
+                                    className={styles.tableroPreview}
                                 >
-                                    {/* Preview del tablero */}
-                                    {tablero.lists?.slice(0, 3).map((lista, index) => (
-                                        <div key={index} className={styles.miniList}>
-                                            {lista.cards?.slice(0, 3).map((card, i) => (
-                                                <div key={i} className={styles.miniCard}></div>
-                                            ))}
-                                        </div>
-                                    ))}
                                 </div>
                             </div>
                         ))}

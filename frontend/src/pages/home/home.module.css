@@ -1,6 +1,5 @@
-.contenedor{
+.container{
     display: flex;
-    margin: 43px 30px;  
     gap: 30px;
 }
 
@@ -32,4 +31,43 @@
     height: 100px;
     border-radius: 8px;
     margin-top: 10px;
+}
+
+.boardGrid{
+    display: flex;
+    width: 300px;
+    font-size: 20px;
+    height: 180px;
+    background: #4C4949;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.lista-preview {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.mini-list {
+    background: white;
+    border-radius: 4px;
+    padding: 5px;
+    width: 30px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.mini-card {
+    background: #0079bf;
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
 }

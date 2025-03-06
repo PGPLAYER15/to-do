@@ -1,9 +1,17 @@
+
+
+/* Tablero.module.css */
 .tablero {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    padding: 20px;
+    margin-left: 20px; /* Compensa el margen del fondo */
+    overflow-x: auto; /* Permite scroll horizontal */
+}
+
+.columnas {
+    min-height: calc(100vh - 150px); /* Altura mínima visible */
     display: flex;
-    flex-direction: column;
-    background-color: #f4f5f7;
-    border-radius: 8px;
-    width: 100%;
+    gap: 1rem;
 }
 
 .nombre{
@@ -14,4 +22,10 @@
     margin: 0px 0px 20px 0px;
     color: rgb(250, 250, 250);
     width: 100%;
+}
+.contener{
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0px 20px;
 }

@@ -2,12 +2,12 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import styles from "../Card/Card.module.css";
 
-function Card(props) {
+function Card({ id, title, columnaId }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
-        id: props.id,
+        id: id,
         data: {
-            columnaId: props.columnaId,
-            cardData: props
+            type: 'card',
+            cardData: { id, title, columnaId }
         }
     });
 
@@ -20,7 +20,7 @@ function Card(props) {
     };
 
     return (
-        <div onClick={()=>console.log("hola")}
+        <div 
             ref={setNodeRef} 
             style={style} 
             {...listeners} 
@@ -28,7 +28,7 @@ function Card(props) {
             className={styles.contenedor}
         >
             <input type="checkbox" className={styles.checkbox} />
-            <p className={styles.titulo}>{props.title}</p>
+            <p className={styles.titulo}>{title}</p>
         </div>
     );
 }

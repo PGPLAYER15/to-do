@@ -1,9 +1,9 @@
 import Home from './pages/home/home';
-import Tablero from './components/Tablero/Tablero';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from "react-error-boundary";
 import './App.css';
+import Board from './pages/board/board';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +30,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/tablero/:id" element={<Tablero />} />
+            <Route path="/tablero/:id" element={<Board />} />
           </Routes>
         </Router>
       </QueryClientProvider>

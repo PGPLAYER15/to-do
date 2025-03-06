@@ -8,9 +8,11 @@ class ListBase(BaseModel):
 class ListCreate(ListBase):
     board_id: int
 
-class ListResponse(ListBase):
+class ListResponse(BaseModel):
     id: int
-    cards: List["CardResponse"] = []
+    title: str
+    board_id: int
+    cards: Optional[List[CardResponse]] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True

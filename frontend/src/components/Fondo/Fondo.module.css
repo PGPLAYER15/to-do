@@ -4,9 +4,14 @@
     --alto-fondo: 100vh;
 }
 
+/* Fondo.module.css */
 .fondo {
     background-color: var(--color-fondo);
     width: var(--ancho-fondo);
-    height: var(--alto-fondo);
-    overflow: hidden; /* Asegúrate de que el contenido no sobresalga */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6.8vh; /* Altura de la cabecera */
+    margin-left: 50px; /* Ancho del menú cerrado */
+    position: relative;
 }

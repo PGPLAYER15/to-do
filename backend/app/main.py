@@ -19,13 +19,11 @@ app.add_middleware(
 # Configurar el evento de inicio
 @app.on_event("startup")
 def startup_event():
-
     Base.metadata.create_all(bind=engine)
     
     db = SessionLocal()
     try:
         if not db.query(Board).first():
-            
             demo_board = Board(
                 title="Mi Primer Tablero",
                 description="Tablero de ejemplo creado automáticamente"
@@ -46,17 +44,15 @@ def startup_event():
             
             db.add_all([tarjeta_1, tarjeta_2])
             db.commit()
-            
-            print("✅ Datos iniciales creados exitosamente!")
-            
+                        
     except Exception as e:
-        print(f"❌ Error al crear datos iniciales: {str(e)}")
+        print(f" Error al crear datos iniciales: {str(e)}")
         db.rollback()
     finally:
         db.close()
 
 app.include_router(boards.router, prefix="/api/boards")
-app.include_router(lists.router, prefix="/api/lists")
+app.include_router(lists.router, prefix="/api/boards/{board_id}/lists")
 app.include_router(cards.router, prefix="/api/cards")
 
 @app.get("/")

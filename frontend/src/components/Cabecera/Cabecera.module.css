@@ -1,4 +1,8 @@
 .cabecera {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     display: flex;
     align-items: center;
     background-color: #2F2C2C;

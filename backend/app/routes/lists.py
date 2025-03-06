@@ -7,9 +7,8 @@ from app.schemas.list import ListCreate, ListResponse
 
 router = APIRouter()
 
-@router.post("/lists/", response_model=ListResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ListResponse, status_code=status.HTTP_201_CREATED)
 def create_list(list_data: ListCreate, db: Session = Depends(get_db)):
-    # Verificar que el board existe
     db_board = db.query(Board).filter(Board.id == list_data.board_id).first()
     if not db_board:
         raise HTTPException(
@@ -24,12 +23,21 @@ def create_list(list_data: ListCreate, db: Session = Depends(get_db)):
     db.refresh(db_list)
     return db_list
 
-@router.get("/boards/{board_id}/lists/", response_model=list[ListResponse])
+@router.get("/", response_model=list[ListResponse])
 def get_lists_by_board(board_id: int, db: Session = Depends(get_db)):
+    print(f"Fetching lists for board_id: {board_id}")
     lists = db.query(List).filter(List.board_id == board_id).all()
+    print(f"Lists found: {lists}")
     return lists
 
-@router.put("/lists/{list_id}", response_model=ListResponse)
+@router.get("/{list_id}", response_model=ListResponse)
+def get_listbyid(list_id: int, db: Session = Depends(get_db)):
+    db_list = db.query(List).filter(List.id == list_id).first()
+    if not db_list:
+        raise HTTPException(status_code=404, detail="Lista no encontrada")
+    return db_list
+
+@router.put("/{list_id}", response_model=ListResponse)
 def update_list(list_id: int, list_data: ListCreate, db: Session = Depends(get_db)):
     db_list = db.query(List).filter(List.id == list_id).first()
     if not db_list:
@@ -42,7 +50,7 @@ def update_list(list_id: int, list_data: ListCreate, db: Session = Depends(get_d
     db.refresh(db_list)
     return db_list
 
-@router.delete("/lists/{list_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{list_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_list(list_id: int, db: Session = Depends(get_db)):
     db_list = db.query(List).filter(List.id == list_id).first()
     if not db_list:
