@@ -43,7 +43,6 @@ function Home() {
                                 onClick={() => navigate(`/tablero/${tablero.id}`)}
                             >
                                 <h3>{tablero.title}</h3>
-                                <p>{tablero.id}</p>
                                 <div 
                                     className={styles.tableroPreview}
                                 >

@@ -1,18 +1,20 @@
-import { useState,useEffect, useRef } from 'react';
-import styles from './Menu.module.css'
-import  ConfigIcon  from '../../assets/confi_logo.svg';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+import styles from './Menu.module.css';
 import MenuIcon from '../../assets/logomenu.svg';
 import CloseIcon from '../../assets/cerrar_logo.svg';
 import clsx from 'clsx';
-
+import { FiSettings, FiLayers } from "react-icons/fi";
 
 function Menu() {
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [menuState, setMenuState] = useState({
         isOpen: false,
         activeItem: null
     });
-    
+
     const toggleMenu = () => {
         setMenuState(prev => ({
             ...prev,
@@ -68,13 +70,30 @@ function Menu() {
                     className={styles.menuItem}
                     onClick={() => console.log('Configuración')}
                 >
-                    <img 
-                        src={ConfigIcon} 
-                        alt="Icono de configuración" 
+                    <FiSettings 
+                        alt="Icono de configuracion"
                         aria-hidden="true"
+                        className={styles.iconsItem}
                     />
+                    
                     {menuState.isOpen && <span>Configuración</span>}
                 </button>
+
+                {location.pathname !== '/' && (
+                    <button
+                        onClick={() => navigate('/')}
+                        className={styles.menuItem}
+                        role='menuitem'
+                    >
+                        <FiLayers
+                            alt="Icono de tableros"
+                            aria-hidden="true"
+                            className={styles.iconsItem}
+                        />
+
+                        {menuState.isOpen && <span>Tableros</span>}
+                    </button>
+                )}
             </div>
         </nav>
     );

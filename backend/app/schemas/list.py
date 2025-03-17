@@ -8,6 +8,8 @@ class ListBase(BaseModel):
 class ListCreate(ListBase):
     board_id: int
 
+class ListUpdateCards(BaseModel):
+    cards: List[int] 
 class ListResponse(BaseModel):
     id: int
     title: str

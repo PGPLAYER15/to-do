@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.database import get_db
 from app.models.list import List
+from app.models.card import Card
 from app.models.board import Board  # Necesario para validar que el board_id existe
-from app.schemas.list import ListCreate, ListResponse
+from app.schemas.list import ListCreate, ListResponse ,ListUpdateCards
 
 router = APIRouter()
 
@@ -16,7 +17,6 @@ def create_list(list_data: ListCreate, db: Session = Depends(get_db)):
             detail="Tablero no encontrado"
         )
     
-    # Crear la lista
     db_list = List(**list_data.dict())
     db.add(db_list)
     db.commit()
@@ -45,6 +45,21 @@ def update_list(list_id: int, list_data: ListCreate, db: Session = Depends(get_d
     
     for key, value in list_data.dict().items():
         setattr(db_list, key, value)
+    
+    db.commit()
+    db.refresh(db_list)
+    return db_list
+
+@router.put("/{list_id}/cards", response_model=ListResponse)
+def update_list_cards(list_id: int, cards_data: ListUpdateCards, db: Session = Depends(get_db)):
+    db_list = db.query(List).filter(List.id == list_id).first()
+    if not db_list:
+        raise HTTPException(status_code=404, detail="Lista no encontrada")
+    
+    db_cards = db.query(Card).filter(Card.id.in_(cards_data.cards)).all()
+    
+    for card in db_cards:
+        card.list_id = list_id
     
     db.commit()
     db.refresh(db_list)

@@ -50,10 +50,10 @@ function Columna({ id, titulo, cards, onAddCard }) {
                         autoFocus
                     />
                     <div className={styles.contenedor_botones}>
-                        <button onClick={handleGuardar} className={styles.btn_guardar}>
+                        <button onClick={handleGuardar} className={styles.btn_guardar_cancelar}>
                             Guardar
                         </button>
-                        <button onClick={() => setMostrarInput(false)} className={styles.btn_cancelar}>
+                        <button onClick={() => setMostrarInput(false)} className={styles.btn_guardar_cancelar}>
                             Cancelar
                         </button>
                     </div>

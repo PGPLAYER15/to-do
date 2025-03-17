@@ -36,3 +36,11 @@
     width: 185px;
     height: fit-content;
 }
+
+.contenedor_input{
+    margin-top: 5px;
+}
+
+.contenedor_botones{
+    margin: 12px 0px 0px 0px;
+}

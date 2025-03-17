@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.models.database import engine, Base, SessionLocal
-from app.routes import boards, lists, cards
+from app.routes import boards, lists, cards  
 from app.models.board import Board
 from app.models.list import List
 from app.models.card import Card
@@ -16,7 +16,6 @@ app.add_middleware(
     allow_headers=["*"], 
 )
 
-# Configurar el evento de inicio
 @app.on_event("startup")
 def startup_event():
     Base.metadata.create_all(bind=engine)
@@ -53,7 +52,7 @@ def startup_event():
 
 app.include_router(boards.router, prefix="/api/boards")
 app.include_router(lists.router, prefix="/api/boards/{board_id}/lists")
-app.include_router(cards.router, prefix="/api/cards")
+app.include_router(cards.router, prefix="/api/boards/{board_id}/lists/{list_id}/cards")
 
 @app.get("/")
 def read_root():

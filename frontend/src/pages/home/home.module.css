@@ -1,6 +1,7 @@
 .container{
     display: flex;
     gap: 30px;
+    margin: 10px 50px;
 }
 
 .menu-tableros {
