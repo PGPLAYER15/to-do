@@ -25,7 +25,8 @@ def startup_event():
         if not db.query(Board).first():
             demo_board = Board(
                 title="Mi Primer Tablero",
-                description="Tablero de ejemplo creado automáticamente"
+                description="Tablero de ejemplo creado automáticamente",
+                color="#0079BF"
             )
             db.add(demo_board)
             db.commit()
@@ -50,9 +51,21 @@ def startup_event():
     finally:
         db.close()
 
-app.include_router(boards.router, prefix="/api/boards")
-app.include_router(lists.router, prefix="/api/boards/{board_id}/lists")
-app.include_router(cards.router, prefix="/api/boards/{board_id}/lists/{list_id}/cards")
+app.include_router(
+    boards.router, 
+    prefix="/api/boards"
+)
+
+app.include_router(
+    lists.router, 
+    prefix="/api/boards/{board_id}/lists"
+)
+
+app.include_router(
+    cards.router, 
+    prefix="/api/boards/{board_id}/lists/{list_id}/cards",
+    tags=["cards"]
+)
 
 @app.get("/")
 def read_root():

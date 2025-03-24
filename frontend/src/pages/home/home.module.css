@@ -72,3 +72,25 @@
     height: 15px;
     border-radius: 2px;
 }
+
+.boardSection{
+    width: 100%;
+}
+
+.seccionTableros{
+    display: flex;
+    gap: 30px;
+    margin: 10px 50px;
+}
+
+.container_noneboard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.noneboard{
+    width: 350px;
+    height: 350px;
+}

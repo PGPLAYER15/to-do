@@ -4,7 +4,7 @@ import Card from '../Card/Card';
 import CrearIcon from "../../assets/CrearIcon.svg";
 import styles from './TarjetaLista.module.css';
 
-function Columna({ id, titulo, cards, onAddCard }) {
+function Columna({ board_id ,id, titulo, cards, onAddCard }) {
 
     const { setNodeRef } = useDroppable({ 
         id: id,
@@ -29,7 +29,7 @@ function Columna({ id, titulo, cards, onAddCard }) {
             <p className={styles.titulo}>{titulo}</p>
 
             {cards?.map((card) => (
-                <Card key={card.id} id={card.id} title={card.title} columnaId={id} />
+                <Card key={card.id} id={card.id} title={card.title} board_id={board_id} columnaId={id} check={card.check} />
             ))}
 
             {!mostrarInput ? (

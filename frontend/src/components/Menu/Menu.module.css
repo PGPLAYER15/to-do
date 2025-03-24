@@ -1,7 +1,7 @@
 .menuContainer {
     position: fixed;
     left: 0;
-    top: 6.8vh; 
+    top: 4.8vh; 
     height: calc(100vh - 6.8vh);
     background-color: #4C4949;
     display: flex;

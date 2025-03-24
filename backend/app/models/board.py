@@ -49,6 +49,7 @@ class Board(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(100), nullable=False)
     description = Column(String(500), nullable=True)
+    color = Column(String(7), nullable=True)
 
     # Relación con Listas (incluyendo cascade delete)
     lists = relationship(

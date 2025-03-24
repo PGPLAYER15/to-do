@@ -2,10 +2,9 @@
 
 /* Tablero.module.css */
 .tablero {
-    flex-grow: 1; /* Ocupa todo el espacio disponible */
-    padding: 20px;
-    margin-left: 20px; /* Compensa el margen del fondo */
-    overflow-x: auto; /* Permite scroll horizontal */
+    flex-grow: 1;
+    padding: 20px 40px;
+    overflow-x: auto;
 }
 
 .columnas {

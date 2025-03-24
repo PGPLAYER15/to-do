@@ -68,7 +68,10 @@ function Menu() {
                 <button 
                     role="menuitem"
                     className={styles.menuItem}
-                    onClick={() => console.log('Configuración')}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        console.log('Configuración');
+                    }}
                 >
                     <FiSettings 
                         alt="Icono de configuracion"
@@ -81,7 +84,10 @@ function Menu() {
 
                 {location.pathname !== '/' && (
                     <button
-                        onClick={() => navigate('/')}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            navigate('/');
+                        }}
                         className={styles.menuItem}
                         role='menuitem'
                     >
@@ -95,6 +101,7 @@ function Menu() {
                     </button>
                 )}
             </div>
+            
         </nav>
     );
 }

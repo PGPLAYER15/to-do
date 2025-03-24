@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useTableros } from "../../hooks/useTableros.js";
 import Cabecera from "../../components/Cabecera/Cabecera.jsx";
 import Fondo from "../../components/Fondo/Fondo.jsx";
 import Menu from "../../components/Menu/Menu.jsx";
 import styles from "./Home.module.css";
 
 function Home() {
-    const [tableros, setTableros] = useState([]);
-    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
+    const { tableros ,loading , error} = useTableros();
 
-    useEffect(() => {
-        const fetchTableros = async () => {
-            try {
-                const response = await axios.get("http://localhost:8000/api/boards/");
-                console.log("Tableros obtenidos:", response.data);
-                setTableros(response.data);
-            } catch (error) {
-                console.error("Error al obtener tableros:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchTableros();
-    }, []);
-
+    
     if (loading) return <div>Cargando tableros...</div>;
+    if (error) return <div>Error al cargar los tableros</div>;
 
     return (
         <Fondo>
@@ -35,21 +21,33 @@ function Home() {
                 <Menu />
                 <div className={styles.boardSection}>
                     <h1>Mis Tableros</h1>
-                    <div className={styles.boardGrid}>
-                        {tableros.map(tablero => (
-                            <div
-                                key={tablero.id}
-                                className={styles.boardCard}
-                                onClick={() => navigate(`/tablero/${tablero.id}`)}
-                            >
-                                <h3>{tablero.title}</h3>
-                                <div 
-                                    className={styles.tableroPreview}
-                                >
+                    {tableros.length > 0 ?(
+                        <div className={styles.seccionTableros}>
+                            {tableros.map(tablero => (
+                                <div className={styles.boardGrid}>
+                                    <div
+                                        key={tablero.id}
+                                        className={styles.boardCard}
+                                        onClick={() => navigate(`/tablero/${tablero.id}`)}
+                                    >
+                                        <h3>{tablero.title}</h3>
+                                        <div 
+                                            className={styles.tableroPreview}
+                                        >
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                        
+                            ))}
+                        </div>
+                    ):(
+                        <div className={styles.container_noneboard}>
+                            <p>No tienes tableros creados</p>
+                            <img className={styles.noneboard} src="../src/assets/None_boards.png" alt="Sin boards"/>
+                        </div>
+                        
+                    )}
+                    
                 </div>
             </div>
         </Fondo>

@@ -3,12 +3,12 @@ from sqlalchemy.orm import Session
 from app.models.database import get_db
 from app.models.card import Card
 from app.models.list import List
-from app.schemas.card import CardCreate, CardResponse
+from app.schemas.card import CardCreate, CardResponse ,CardUpdate
 
 router = APIRouter()
 
-@router.post("/", response_model=CardResponse, status_code=status.HTTP_201_CREATED)
-def create_card(card_data: CardCreate, db: Session = Depends(get_db)):
+@router.post("/create", response_model=CardResponse, status_code=status.HTTP_201_CREATED)
+def create_card_simple(card_data: CardCreate, db: Session = Depends(get_db)):
     db_list = db.query(List).filter(List.id == card_data.list_id).first()
     if not db_list:
         raise HTTPException(
@@ -35,13 +35,18 @@ def get_card_by_id(card_id: int, db: Session = Depends(get_db)):
     return db_card
 
 @router.put("/{card_id}", response_model=CardResponse)
-def update_card(card_id: int, card_data: CardCreate, db: Session = Depends(get_db)):
+def update_card(card_id: int, card_data: CardUpdate, db: Session = Depends(get_db)):
     db_card = db.query(Card).filter(Card.id == card_id).first()
     if not db_card:
         raise HTTPException(status_code=404, detail="Tarjeta no encontrada")
     
-    for key, value in card_data.dict().items():
+    for key, value in card_data.dict(exclude_unset=True).items():
         setattr(db_card, key, value)
+    
+    db.commit()
+    db.refresh(db_card)
+    return db_card
+
     
     db.commit()
     db.refresh(db_card)

@@ -5,6 +5,7 @@ from .list import ListResponse  # Asegúrate de tener este esquema
 class BoardBase(BaseModel):
     title: str
     description: Optional[str] = None
+    color: str
 
 class BoardCreate(BoardBase):
     pass
