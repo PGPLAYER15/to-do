@@ -9,7 +9,7 @@ function Temporizador({ minutes, seconds, isWorking }) {
             <div className={styles.tiempo}>
                 {formatTime(minutes)}:{formatTime(seconds)}
             </div>
-            <div>
+            <div className={styles.responsiveText}>
                 {isWorking ? 'Tiempo de trabajo' : 'Tiempo de descanso'}
             </div>
         </div>

@@ -1,16 +1,50 @@
 .temporizador {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center;
     font-size: 0.85rem;
     font-weight: bold;
     color: #ffffff;
-    background-color: #d5d2d255;
+    background-color: rgba(213, 210, 210, 0.33);
     border-radius: 5px;
     text-align: center;
-    padding: 10px 10px;
+    padding: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center; 
 }
 
 .temporizador .tiempo {
-    margin-right: 10px; 
+    white-space: nowrap; 
+}
+
+@media (max-width: 1024px) {
+    .temporizador {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .temporizador {
+        flex-direction: column;
+        gap: 4px;
+        padding: 6px 8px;
+    }
+    
+    .temporizador .tiempo {
+        margin-right: 0; 
+        margin-bottom: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .temporizador {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+    }
+
+    .responsiveText{
+        display: none;
+    }
 }

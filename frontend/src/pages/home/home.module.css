@@ -1,42 +1,51 @@
-.container{
+.container, .seccionTableros {
     display: flex;
     gap: 30px;
     margin: 10px 50px;
+    flex-wrap: wrap;
 }
 
 .menu-tableros {
     padding: 20px;
+    width: 100%;
 }
   
 .lista-tableros {
     display: flex;
-    gap: 2%;
+    gap: 20px;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
   
-.tablero-card{
+.tablero-card {
     background: #f4f4f4;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     text-align: center;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: calc(25% - 25px);
+    min-width: 200px;
 }
   
 .tablero-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .tablero-preview {
     height: 100px;
     border-radius: 8px;
     margin-top: 10px;
+    object-fit: cover;
+    width: 100%;
 }
 
-.boardGrid{
+.boardGrid {
     display: flex;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     font-size: 20px;
     height: 180px;
     background: #4C4949;
@@ -44,6 +53,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    color: white;
+    margin: 0 auto;
 }
 
 .lista-preview {
@@ -51,6 +62,7 @@
     gap: 5px;
     justify-content: center;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .mini-list {
@@ -73,24 +85,109 @@
     border-radius: 2px;
 }
 
-.boardSection{
+.boardSection {
     width: 100%;
 }
 
-.seccionTableros{
-    display: flex;
-    gap: 30px;
-    margin: 10px 50px;
-}
-
-.container_noneboard{
+.container_noneboard {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column-reverse;
+    text-align: center;
+    padding: 20px;
 }
 
-.noneboard{
-    width: 350px;
-    height: 350px;
+.noneboard {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+    .tablero-card {
+        width: calc(33.33% - 20px);
+    }
+    
+    .container, .seccionTableros {
+        margin: 10px 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .tablero-card {
+        width: calc(50% - 15px);
+    }
+    
+    .boardGrid {
+        height: 160px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container, .seccionTableros {
+        margin: 10px 20px;
+        gap: 20px;
+    }
+    
+    .tablero-card {
+        width: 100%; 
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .menu-tableros {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container, .seccionTableros {
+        margin: 10px 15px;
+        gap: 15px;
+    }
+    
+    .boardSection{
+        margin-top: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .boardGrid {
+        height: 140px;
+        font-size: 16px;
+    }
+    
+    .mini-list {
+        width: 25px;
+        min-height: 70px;
+    }
+    
+    .mini-card {
+        width: 18px;
+        height: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .boardSection{
+        margin-top: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .container, .seccionTableros {
+        margin: 10px;
+    }
+    
+    .lista-tableros {
+        gap: 15px;
+    }
+    
+    .tablero-card {
+        padding: 15px;
+    }
 }

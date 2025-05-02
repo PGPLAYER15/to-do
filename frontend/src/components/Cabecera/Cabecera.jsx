@@ -38,18 +38,24 @@ function Cabecera() {
 
     return (
         <div className={styles.cabecera}>
-            <div className={styles.cabecera__left_group}>
-                <button className={styles.btn_espacio}>Espacio de trabajo</button>
-                <button onClick={openModal} className={styles.btn_menu_arriba}>Crear</button>
-            </div>
 
-            <div className={styles.contenedor_tempo}>
-                <TemporizadorBotones
-                    iniciar={iniciar}
-                    pausar={pausar}
-                    reiniciar={reiniciar}
-                    isActive={isActive}
-                />
+            <div className={styles.contenedor}>
+                <div className={styles.contenedor_botones}>
+                    <button
+                        onClick={openModal} 
+                        className={styles.btn_menu_arriba}
+                        >
+                            Crear
+                    </button>
+
+                    <TemporizadorBotones
+                        iniciar={iniciar}
+                        pausar={pausar}
+                        reiniciar={reiniciar}
+                        isActive={isActive}
+                    />
+                </div>
+                
                 <Temporizador
                     minutes={minutes}
                     seconds={seconds}

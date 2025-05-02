@@ -2,23 +2,83 @@
     --color-fondo: #6b6b6b;
     --ancho-fondo: 100vw;
     --alto-fondo: 100vh;
+    --padding-top: 6.8vh;
+    --margin-left: 50px;
 }
 
-body,html{
+body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-y: hidden
+    overflow-y: hidden;
 }
 
 .fondo {
     background-color: var(--color-fondo);
     width: var(--ancho-fondo);
-    height: var(--alto-fondo);
+    min-height: var(--alto-fondo);
     display: flex;
     flex-direction: column;
-    padding-top: 6.8vh; 
-    margin-left: 50px;
+    padding-top: var(--padding-top);
+    margin-left: var(--margin-left);
     position: relative;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Media Queries para diferentes tamaños de pantalla */
+@media (max-width: 1200px) {
+    :root {
+        --margin-left: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --padding-top: 6vh;
+        --margin-left: 35px;
+    }
+    
+    body, html {
+        overflow-y: auto; /* Permite scroll vertical en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --padding-top: 5.5vh;
+        --margin-left: 30px;
+    }
+    
+    .fondo {
+        padding-top: calc(var(--padding-top) + 10px); /* Espacio adicional */
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --padding-top: 5vh;
+        --margin-left: 0;
+    }
+    
+    body, html {
+        overflow-y: auto; /* Siempre permite scroll en móviles */
+    }
+    
+    .fondo {
+        margin-left: 0;
+        padding-top: calc(var(--padding-top) + 15px); /* Más espacio para cabecera móvil */
+        padding-bottom: 60px; /* Espacio para menú inferior en móviles */
+    }
+}
+
+@media (max-width: 375px) {
+    :root {
+        --padding-top: 4.5vh;
+    }
+    
+    .fondo {
+        padding-top: calc(var(--padding-top) + 20px);
+    }
 }

@@ -7,6 +7,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-ki
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 const Tablero = ({ id }) => {
+
     const {
         tablero,
         columnas,

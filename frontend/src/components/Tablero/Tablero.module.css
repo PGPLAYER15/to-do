@@ -4,11 +4,13 @@
 .tablero {
     flex-grow: 1;
     padding: 20px 40px;
+    margin-top: 40px;
     overflow-x: auto;
 }
 
 .columnas {
-    min-height: calc(100vh - 150px); /* Altura mínima visible */
+    min-height: calc(100vh - 150px);
+    width: fit-content;
     display: flex;
     gap: 1rem;
 }
@@ -28,3 +30,4 @@
     gap: 10px;
     margin: 0px 20px;
 }
+

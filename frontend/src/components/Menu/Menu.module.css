@@ -1,22 +1,26 @@
 .menuContainer {
     position: fixed;
     left: 0;
-    top: 4.8vh; 
+    top: 4.8vh;
     height: calc(100vh - 6.8vh);
     background-color: #4C4949;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 30px 0;
+    padding: 1.5rem 0;
     transition: all 0.3s ease;
+    height: 100%;
     width: 50px;
     z-index: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    align-content: center;
+    align-items: center;
 }
 
 .menuOpen {
     width: 250px;
     align-items: flex-start;
-    padding: 30px 20px;
+    padding: 1.5rem 1.25rem;
     opacity: 0.9;
 }
 
@@ -25,12 +29,17 @@
     background: none;
     border: none;
     padding: 0;
-    margin: 15px 0;
+    margin: 0.75rem 0;
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
     outline: none;
-    width: fit-content
+    width: fit-content;
+    transition: transform 0.2s ease;
+}
+
+.menuButton:hover {
+    transform: translateX(3px);
 }
 
 .menuContent {
@@ -42,26 +51,26 @@
 .menuItem {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 0.9375rem;
     color: white;
     background: none;
     border: none;
-    width: fit-content;
-    padding: 10px 0;
+    width: 100%;
+    padding: 0.625rem 0;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    outline: none;
+    transition: opacity 0.3s ease, background-color 0.2s ease;
+    cursor: pointer;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.menuItem:not(:focus-visible){
-    outline: none;
+.menuItem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-
-.menuButton:focus,
-.menuButton:active,
-.menuButton:focus-visible {
-    outline: none;
+.menuItem:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .menuOpen .menuItem {
@@ -72,18 +81,101 @@
     color: white;
     font-size: 1.25rem;
     white-space: nowrap;
-    margin-left: 10px;
+    margin-left: 0.625rem;
+    transition: color 0.2s ease;
 }
 
-.menuButton img {
+.menuButton img, .iconsItem {
     width: 25px;
     min-width: 25px;
-    height: auto;
-    outline: none;
-
+    height: 25px;
+    object-fit: contain;
 }
 
-.iconsItem{
-    width: 25px;
-    height: 25px;
+/* Media Queries para Responsividad */
+@media (max-width: 1024px) {
+    .menuContainer {
+        top: 6vh;
+        height: calc(100vh - 6vh);
+    }
+    
+    .menuOpen {
+        width: 220px;
+    }
+    
+    .buttonText {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menuContainer {
+        width: 40px;
+        padding: 1rem 0;
+    }
+    
+    .menuOpen {
+        width: 200px;
+        padding: 1rem;
+    }
+    
+    .menuButton img, .iconsItem {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+    }
+    
+    .buttonText {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menuContainer {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: auto;
+        flex-direction: row;
+        padding: 0.5rem;
+        justify-content: space-around;
+    }
+    
+    .menuOpen {
+        width: 100%;
+        height: 17.7vh;
+        bottom: 0;
+        top: auto;
+        flex-direction: column;
+        padding: 1rem;
+        align-items: center;
+    }
+    
+    .menuContent {
+        display: none;
+    }
+    
+    .menuOpen .menuContent {
+        display: block;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+    
+    .menuButton {
+        margin: 0.5rem 0;
+        justify-content: center;
+    }
+    
+    .menuOpen .menuButton {
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .buttonText {
+        display: none;
+    }
+    
+    .menuOpen .buttonText {
+        display: inline;
+    }
 }
