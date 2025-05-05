@@ -15,7 +15,10 @@ body, html {
 }
 
 .fondo {
-    background-color: var(--color-fondo);
+    background-color: #111111;
+    background-image: 
+        radial-gradient(at 47% 33%, hsl(211.48, 72%, 16%) 0, transparent 59%), 
+        radial-gradient(at 82% 65%, hsl(217.45, 98%, 19%) 0, transparent 55%);
     width: var(--ancho-fondo);
     min-height: var(--alto-fondo);
     display: flex;
@@ -25,6 +28,7 @@ body, html {
     position: relative;
     box-sizing: border-box;
     transition: all 0.3s ease;
+    overflow-x: hidden;
 }
 
 /* Media Queries para diferentes tamaños de pantalla */
@@ -82,3 +86,4 @@ body, html {
         padding-top: calc(var(--padding-top) + 20px);
     }
 }
+

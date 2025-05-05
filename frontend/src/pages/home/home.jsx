@@ -22,7 +22,7 @@ function Home() {
                     {tableros.length > 0 ? (
                         <div className={styles.seccionTableros}>
                             {tableros.map(tablero => (
-                                <div key={tablero.id} className={styles.boardGrid}>
+                                <div style={{ background: tablero.color || "#ffffff" }} key={tablero.id} className={styles.boardGrid}>
                                     <div
                                         className={styles.boardCard}
                                         onClick={() => navigate(`/tablero/${tablero.id}`)}
